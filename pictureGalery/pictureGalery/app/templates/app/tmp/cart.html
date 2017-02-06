@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href= {% static "app/css/style_pict.css" %} type='text/css'>
+    <style>
+.cart-left {
+	float: left;
+	margin-right: 2.6%;
+}
+
+.cart-items {
+	padding: 60px 0;
+}
+.cart-items h2 {
+	margin: 0 0 20px 0;
+	text-align: center;
+	font-size: 28px;
+	color: #816263;
+	font-weight: 600;
+	padding:0;
+}
+.cart-item {
+	width: 20%;
+	float: left;
+	margin-right: 4%;
+}
+.cart-item img {
+	width: 100%;
+        }
+.cart-item-info {
+	width: 75%;
+	float: left;
+	margin-top: 3%;
+}
+.cart-item-info h3 {
+	color:#000;
+	font-size: 14px;
+	font-weight: 600;
+}
+.cart-item-info h3 a {
+	color:#816263;
+    font-size: 18px;
+}
+.cart-item-info h3 span {
+	display: block;
+	font-weight: 400;
+	font-size: 0.85em;
+	margin: 0.7em 0;
+
+    </style>
+     <h3 class="head text-center">Корзина</h3>   
+     {% for picture in pictures %}
+           	<div class="cart-header" id="{{picture.id}}">
+				 <div  class="cart-sec">
+						<div class="cart-item cyc">
+							 <img src="static/app/img_p/{{picture.id}}.jpg" width="450" height="300" class="img-responsive" alt="">
+						</div>
+					   <div class="cart-item-info">
+						<h3><a href="img/{{picture.id}}"> Подробнее о картине</a></h3>
+							 <div class="delivery">
+							 <p>Стоимость : $ {{picture.cost}}</p>
+							 <button type="button " class="btn btn-danger del_pic" value="{{picture.id}}">Удалить</button>
+							 <div class="clearfix"></div>
+				        </div>	
+					   </div>
+					   <div class="clearfix"></div>					
+				  </div>
+			 </div>
+			 <br>
+     {% endfor %}
+     <br>
+    <div class="container-fluid">Сумма к оплате: $ {{sum}} </div>
+     <div class="container-fluid text-center">
+     <a href="cart/save" class="btn btn-info" role="button">Оформить заказ</a>
+     
+     </div>
+    </head>
+    <script>
+    $(".del_pic").click(function(){
+       var button = $(this);
+               var json ={
+                id:  $(this).attr("value") 
+        };
+        var data_json = JSON.stringify(json);
+        $.ajax({
+        type: 'POST',
+        url: "cart/del",
+        dataType: "json",
+        data:data_json,
+        success: function (obj) {
+            if (obj.free) {
+               $("div#"+button.attr("value")).slideUp(500);
+    }
+        },
+        })
+    });
+    </script>
+</html>

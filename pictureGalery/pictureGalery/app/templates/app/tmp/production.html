@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link href="css/bootstrap.css" rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/style_pict.css"type='text/css'>
+    <div id="content" class="container">
+    <div class="products-grid">
+					<h3 class="head text-center">Картины</h3>
+					<div class="col-md-4 product text-center">
+						<a href="single.html"><img src="img/1200px-Ilia_Efimovich_Repin_(1844-1930)_-_Volga_Boatmen_(1870-1873).jpg" alt="" /></a>
+						<div class="mask">
+							<a href="#">Просмотр</a>
+						</div><br>
+						<p><a class="item_add" href="#"><i></i> <span class="item_price glyphicon glyphicon-usd">329</span></a></p>
+					</div>
+       <div class="col-md-4 product text-center">
+						<a href="single.html"><img src="img/mona-lisa.jpg" alt="" /></a>
+						<div class="mask">
+							<a href="#">Просмотр</a>
+						</div><br>
+						<p><a class="item_add" href="#"><i></i> <span class="item_price glyphicon glyphicon-usd">329</span></a></p>
+					</div>
+       <div class="col-md-4 product text-center">
+						<a href="single.html"><img src="img/mona-lisa.jpg" alt="" /></a>
+						<div class="mask">
+							<a href="#">Просмотр</a>
+						</div><br>
+						<p><a class="item_add" href="#"> <span class="item_price glyphicon glyphicon-usd">329</span></a></p>
+					</div>
+        </div>
+    </div>
+     <div id="pagingControls"></div>
+</head>
+<body>
+   <div class="container-fluid text-center">
+    <ul class="pagination">
+  <li class="active"><a id="1" class="but" href="#">1</a></li>
+  <li><a id="2" class="but" href="#">2</a></li>
+</ul>
+</div>
+  <script>
+      var Mas = [{"path":"img/mona-lisa.jpg","cost": "99.99"},{"path":"img/mona-lisa.jpg","cost": "99.91"},{"path":"img/1200px-Ilia_Efimovich_Repin_(1844-1930)_-_Volga_Boatmen_(1870-1873).jpg","cost": "99.92"}];
+      $(".but").click(function(item){
+            $(".pagination > li").removeClass("active");
+            $(this).parent("li").addClass("active");
+                $(".product").each(function(index){
+//                    alert(this);
+//                    alert(index);
+          $(this).find(".item_price").text(Mas[index].cost);
+          $(this).find("img").attr("src",Mas[index].path);          
+        })                                       
+      });
+    </script>
+</body>
+</html>
